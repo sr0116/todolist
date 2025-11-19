@@ -1,9 +1,10 @@
 "use client";
 
-import { Provider as ReduxProvider, useSelector } from "react-redux";
-import { store } from "./store/store";
-import { RootState } from "./store/store";
-import { useEffect } from "react";
+import {Provider as ReduxProvider, useSelector} from "react-redux";
+import {store} from "./store/store";
+import {RootState} from "./store/store";
+import {useEffect} from "react";
+import InitLoader from "@/app/InitLoader";
 
 function ThemeHandler() {
   const theme = useSelector((state: RootState) => state.ui.theme);
@@ -18,11 +19,13 @@ function ThemeHandler() {
   return null;
 }
 
-export default function Provider({ children }: { children: React.ReactNode }) {
+export default function Provider({children}: { children: React.ReactNode }) {
   return (
     <ReduxProvider store={store}>
-      <ThemeHandler />
-      {children}
+      <InitLoader>
+        <ThemeHandler/>
+        {children}
+      </InitLoader>
     </ReduxProvider>
   );
 }
