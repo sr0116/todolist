@@ -7,6 +7,7 @@ import { useEffect } from "react";
 import { loadTasks } from "./store/taskSlice";
 import { loadCalendar } from "./store/calendarSlice";
 import { loadTheme } from "./store/uiSlice";
+import {loadNotes} from "@/app/store/notesSlice";
 
 // InitLoader는 앱 시작 시 1번 실행되어
 // localStorage → Redux로 상태를 불러오는 역할
@@ -27,6 +28,12 @@ export default function InitLoader({ children }: { children: React.ReactNode }) 
     if (theme) dispatch(loadTheme(JSON.parse(theme)));
 
   }, [dispatch]);
+
+  useEffect(() => {
+    const savedNotes = localStorage.getItem("planner_notes");
+    if (savedNotes) dispatch(loadNotes(JSON.parse(savedNotes)));
+  }, []);
+
 
   return <>{children}</>;
 }

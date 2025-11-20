@@ -4,6 +4,9 @@ import { configureStore } from "@reduxjs/toolkit";
 import uiReducer from "./uiSlice";
 import taskReducer from "./taskSlice";
 import calendarReducer from "./calendarSlice";
+import notesReducer from "./notesSlice";
+import boardsReducer from "./boardsSlice";
+
 
 // Redux store 생성
 export const store = configureStore({
@@ -11,6 +14,8 @@ export const store = configureStore({
     ui: uiReducer,
     tasks: taskReducer,
     calendar: calendarReducer,
+    notes: notesReducer,
+    boards: boardsReducer,
   },
 });
 
@@ -32,4 +37,12 @@ store.subscribe(() => {
 
   // UI theme 저장
   localStorage.setItem("planner_ui", JSON.stringify(state.ui.theme));
+});
+
+// notes 자동 저장
+store.subscribe(() => {
+  const notes = store.getState().notes.list;
+  if (typeof window !== "undefined") {
+    localStorage.setItem("planner_notes", JSON.stringify(notes));
+  }
 });
