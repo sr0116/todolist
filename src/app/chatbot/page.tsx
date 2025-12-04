@@ -4,7 +4,6 @@
 import { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-import ChatContainer from "@/app/components/chat/ChatContainer";
 import InputBar from "@/app/components/chat/InputBar";
 
 import {
@@ -17,6 +16,14 @@ import {
 } from "@/store/slice/chatSlice";
 
 import { AppDispatch, RootState } from "@/store/store";
+
+import dynamic from "next/dynamic";
+
+//  ChatContainer SSR 비활성화
+const ChatContainer = dynamic(
+  () => import("@/app/components/chat/ChatContainer"),
+  { ssr: false }
+);
 
 export default function ChatbotPage() {
   const dispatch = useDispatch<AppDispatch>();
