@@ -13,6 +13,7 @@ interface Props {
   loading: boolean;
 }
 
+
 export default function ChatContainer({ messages, bottomRef, loading }: Props) {
   return (
     <div className="flex-1 overflow-y-auto p-6 space-y-4">
