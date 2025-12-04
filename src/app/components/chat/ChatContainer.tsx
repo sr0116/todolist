@@ -20,7 +20,6 @@ export default function ChatContainer({ messages, bottomRef, loading }: Props) {
       {messages.map((msg, index) => (
         <MessageBubble key={index} role={msg.role} content={msg.content} />
       ))}
-
       {loading && <TypingIndicator />}
 
       <div ref={bottomRef}></div>
